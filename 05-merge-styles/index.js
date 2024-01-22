@@ -15,11 +15,14 @@ async function packStyles() {
   files.forEach(async file => {
     const filePath = path.join(stylesPath, file);
     const fileContent = await fs.readFile(filePath, 'utf-8');
-    await fs.appendFile(bundlePath, fileContent + '\n', 'utf-8');
+    const ext = path.extname(path.basename(filePath));
+    if (ext === '.css') {
+      await fs.appendFile(bundlePath, fileContent + '\n', 'utf-8');
+    }
   });
     
     console.log('Файл успешно собран');
-    
+
 }
 
 //program start
